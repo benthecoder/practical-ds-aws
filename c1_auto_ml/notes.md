@@ -3,12 +3,18 @@
 - [Notes](#notes)
   - [Week 1: Explore use case and analyze dataset](#week-1-explore-use-case-and-analyze-dataset)
     - [Tools](#tools)
+    - [Resources](#resources)
     - [Snippets](#snippets)
   - [Week 2: Statistical Bias](#week-2-statistical-bias)
     - [Causes](#causes)
     - [Metrics for bias](#metrics-for-bias)
     - [Feature importance: SHAP](#feature-importance-shap)
-  - [Resources](#resources)
+  - [Week 3 : AutoML](#week-3--automl)
+    - [Model Building challenges](#model-building-challenges)
+    - [AutoML](#automl)
+    - [TF-IDF](#tf-idf)
+      - [TF - Term Frequency](#tf---term-frequency)
+      - [IDF - Inverse-document frequency](#idf---inverse-document-frequency)
 
 ## Week 1: Explore use case and analyze dataset
 
@@ -29,6 +35,10 @@
 - AWS Glue Crawlers -> Catalog data in its schema
 - AWS Sagemaker Data Wrangler and Clarify -> bias detection
 - [AWS data Wrangler](https://github.com/awslabs/aws-data-wrangler)
+
+### Resources
+
+- [Optimize Python ETL by extending Pandas with AWS Data Wrangler](https://aws.amazon.com/blogs/big-data/optimize-python-etl-by-extending-pandas-with-aws-data-wrangler/)
 
 ### Snippets
 
@@ -116,6 +126,62 @@ It considers all possible combinations of feature values + outcomes of ML model.
 
 [shap docs](https://shap.readthedocs.io/en/latest/)
 
-## Resources
+## Week 3 : AutoML
 
-- [Optimize Python ETL by extending Pandas with AWS Data Wrangler](https://aws.amazon.com/blogs/big-data/optimize-python-etl-by-extending-pandas-with-aws-data-wrangler/#:~:text=AWS%20Data%20Wrangler%20is%20an,the%20extraction%20and%20load%20steps)
+### Model Building challenges
+
+> nature of ML makes it difficult to iterate quickly (limited by compute/human resources)
+
+- creating ML model involves multiple iterations that increases time-to-market
+- requires specialize skill sets from existing teams
+- ML experiments take much longer than traditional development life cycles (long time to get model performance and run experiments)
+
+### AutoML
+
+- reduce time-to-market
+- lower ML barrier
+- iterate quickly with automation
+- save resources for more challenging use-cases
+
+### TF-IDF
+
+- Evaluates how relevant a word is to a document/collection of documents
+
+Bag-of-Words is typical approach of putting words in bag -> sample without replacement, tally the count of words.
+
+To measure word importance:
+
+- increase proportionally to number of times word appear in document
+- decrease proportionally by the frequency of word in corpus
+
+#### TF - Term Frequency
+
+Idea: Relative frequency of a word in a document, against all other words in the document
+
+$tf(t, d) = \frac{f_{t, d}}{\Sigma_{t' \in d} f_{t' \in d}}$
+
+t - term, d - document, D - corpus
+
+It's possible that terms would appear more in longer documents that shorter ones.
+
+#### IDF - Inverse-document frequency
+
+Idea: Look at whole corpus to measure how important is a term
+
+$idf(t, D) = log(\frac{|D|}{|d \in D : t \in d})$
+
+Common words like "if", "the", will appear many times but they have little importance, so you scale down the weight of frequent terms while you scale up the rare ones.
+
+Caveat: might lead to division by zero
+
+example:
+
+Document containing 200 words, the word "food" appear 10 times.
+
+tf("food", d) = 10/200 = 0.05
+
+If corpus has 1 million documents, and word "food" appear in 1000 of these documents
+
+idf("food", D) = log( 1M / 1000 ) = 3
+
+So, tf-idf weight = 0.05 \* 3 = 0.15

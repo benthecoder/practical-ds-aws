@@ -23,8 +23,8 @@ Each of the 10 weeks features a comprehensive lab developed specifically for thi
 
 ## Specializations
 
-| No  |                                       Course Folder                                       | Date Completed |
-| :-: | :---------------------------------------------------------------------------------------: | :------------: |
-|  1  |     [Analyze Datasets and Train ML Models using AutoML](https://tinyurl.com/2dslrxx5)     |  In Progress   |
-|  2  |     [Build, Train, and Deploy ML Pipelines using BERT](https://tinyurl.com/2qywpem6)      |       -        |
-|  3  | [Optimize ML Models and Deploy Human-in-the-Loop Pipelines](https://tinyurl.com/2mkugzaa) |       -        |
+| No  |                          Course Folder                          | Date Completed |
+| :-: | :-------------------------------------------------------------: | :------------: |
+|  1  | [Analyze Datasets and Train ML Models using AutoML](c1_auto_ml) |  In Progress   |
+|  2  |      [Build, Train, and Deploy ML Pipelines using BERT](#)      |       -        |
+|  3  | [Optimize ML Models and Deploy Human-in-the-Loop Pipelines](#)  |       -        |

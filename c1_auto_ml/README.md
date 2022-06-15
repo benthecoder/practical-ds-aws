@@ -15,6 +15,10 @@
     - [TF-IDF](#tf-idf)
       - [TF - Term Frequency](#tf---term-frequency)
       - [IDF - Inverse-document frequency](#idf---inverse-document-frequency)
+    - [Sagemaker autopilot](#sagemaker-autopilot)
+  - [Week 4: Built-in algorithms](#week-4-built-in-algorithms)
+    - [Use cases](#use-cases)
+    - [Word-2-vec](#word-2-vec)
 
 ## Week 1: Explore use case and analyze dataset
 
@@ -185,3 +189,39 @@ If corpus has 1 million documents, and word "food" appear in 1000 of these docum
 idf("food", D) = log( 1M / 1000 ) = 3
 
 So, tf-idf weight = 0.05 \* 3 = 0.15
+
+### Sagemaker autopilot
+
+- Sagemaker's implementation of AutoML
+- has full transparency into data transformation, hyperparameter (provides notebooks for experiments) feature importance, model performance, etc.
+
+Running SageMaker AutoPilot generates two notebooks:
+
+- Data exploration
+- Candidate definition
+
+## Week 4: Built-in algorithms
+
+### Use cases
+
+1. Feature Engineering (Dimensionality reduction)
+   - drop weak features (color for predicting mileage)
+   - PCA: reduce number of features while retaining as much info as possible
+2. Binary/multi-class classification
+   - predict labels (spam or not spam)
+   - XGBoost: Extreme Gradient Boosting
+     - Boosting: a sequential process where each model attempts to correct errors of previous models (assign more weights to false classifications), to form a strong learner at the end
+     - performs really well because of its robust handling of a variety of data types, relationships, and distributions, and the variety of hyperparameters that you can fine tune.
+3. Anomaly Detection
+   - Detect abnormal behaviour
+   - Random cut forest (RCF)
+     - an unsupervised algorithm for detecting anomalous data points, it assings an anomaly score for each data point (low being normal and high being an anomaly)
+4. Clustering
+   - group customers in spending groups from transactions
+   - K-means: unsupervised learning model that group similar objects together into k clusters where each data point belong to the cluster with the nearest mean
+5. Topic Modelling
+   - Latent Dirichlet Allocation: generative probability model that attempts to provide a model for the distribution of input and outputs based on latent varirables.
+   - Latent variables are variables that are not directly observed but inferred from other variables (direct opposite of discriminant models which learns how input map to outputs)
+   - Neural Topic Modelling
+
+### Word-2-vec

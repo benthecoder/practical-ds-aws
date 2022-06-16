@@ -18,7 +18,7 @@
     - [Sagemaker autopilot](#sagemaker-autopilot)
   - [Week 4: Built-in algorithms](#week-4-built-in-algorithms)
     - [Use cases](#use-cases)
-    - [Word-2-vec](#word-2-vec)
+    - [Evolution of text analysis algorithms](#evolution-of-text-analysis-algorithms)
 
 ## Week 1: Explore use case and analyze dataset
 
@@ -224,4 +224,34 @@ Running SageMaker AutoPilot generates two notebooks:
    - Latent variables are variables that are not directly observed but inferred from other variables (direct opposite of discriminant models which learns how input map to outputs)
    - Neural Topic Modelling
 
-### Word-2-vec
+### Evolution of text analysis algorithms
+
+1. Simpel bag of words model (1950s)
+1. [Word2Vec](https://arxiv.org/pdf/1301.3781.pdf) (2013)
+   - converts text into vectors (embeddings)
+   - use as inputs to ML algos - KNN or clustering
+   - model architectures:
+     - continuous bag-of-words (CBOW) : predict current word from window of surrounding context words
+     - continuous skip grams : use current word to predict surrounding context words
+   - Challenge: out of vocabulary issue: for words that are not present in text data, model will discard it
+1. [GloVe](https://aclanthology.org/D14-1162.pdf) (2014)
+   - use regression to learn word representation through unsupervised learning
+1. [FastText](https://arxiv.org/pdf/1607.04606v2.pdf)
+   - Extension of Word2Vec, breaks word into character sets of length n (n-grams) which helps with out of vocabulary issue
+   - ex: "amazon" -> "a", "am", "ama", "amaz", "amazo", "amazon"
+   - embedding for a word is the aggregate of the embedding of each n-gram with the word
+1. [Transformers](https://arxiv.org/abs/1706.03762) (2017)
+   - concept of attention refers to one model component capturing correlation between input and output
+   - attention would macp each word from model output to words in input sequence, assigning weights depending on importance towards predicted word
+   - self-attention mechanism focuses on capturing relationship between all words in the input sequence and significantly improved NLU tasks
+1. [BlazingText](https://dl.acm.org/doi/pdf/10.1145/3146347.3146354) (2017)
+   - highly optimized implementation of Word2Vec and text classiifcation algorithms with multiple CPU or GPUs
+1. [ElMo](https://arxiv.org/pdf/1802.05365v2.pdf) (2018)
+   - word vectors are learned from deep bidirectional language model
+   - combines forward and backward language model - better captures syntax and semantics across different liguistic context
+1. [GPT](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf) (2018)
+   - trained on large unlabled text corpus
+   - predicts from left to right, uni-directional
+1. [BERT](https://arxiv.org/abs/1810.04805) (2018)
+   - bidirectional
+   - learns representation from unlabeled text from L to R and R to L
